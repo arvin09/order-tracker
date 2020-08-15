@@ -227,7 +227,7 @@ export default {
           if (orders.docs.length) {
             self.orderNo = parseInt(orders.docs[0].id) + 1;
           } else {
-            self.orderNo = self.defaultOrderNo;
+            self.orderNo = this.defaultOrderNo;
           }
         })
         .catch(function(error) {
