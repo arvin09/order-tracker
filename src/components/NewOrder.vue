@@ -9,19 +9,20 @@
           class="form-control"
           id="inputCustomerName"
           v-model="customerName"
-          placeholder="Customer Name"
+          placeholder="Customer name"
           required
         />
       </div>
       <div class="form-group col-md-4">
         <label for="inputMobile">Mobile</label>
         <input
-          type="mobile"
+          type="tel"
           class="form-control"
           id="inputMobile"
           v-model="mobileNo"
           placeholder="##########"
           pattern="^\d{10}$"
+          maxlength="10"
           required
         />
       </div>
@@ -34,7 +35,6 @@
           v-model="emailId"
           placeholder="Email"
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-          required
         />
       </div>
     </div>
@@ -61,19 +61,23 @@
           id="inputOrderNo"
           v-model="orderNo"
           placeholder="Order no."
-          required
+          disabled
         />
       </div>
       <div class="form-group col-md-4">
         <label for="inputSalePerson">Sales person</label>
-        <input
-          type="text"
-          class="form-control"
+        <select
+          class="custom-select mr-sm-2"
           id="inputSalePerson"
-          v-model="salesperson"
-          placeholder="Sale person name"
           required
-        />
+          v-model="salesperson"
+        >
+          <option value="" selected>Sales person name</option>
+          <option value="Baliram Waghmare">Baliram Waghmare</option>
+          <option value="Tukaram Kamble">Tukaram Kamble</option>
+          <option value="Akshya Waghmare">Akshya Waghmare</option>
+          <option value="Tejas Kamble">Tejas Kamble</option>
+        </select>
       </div>
       <div class="form-group col-md-4">
         <label for="totalCost">Total cost</label>
@@ -201,15 +205,35 @@ export default {
       color: "",
       material: "",
       size: "",
-      quantity: "",
+      quantity: 1,
       orderNo: "",
+      defaultOrderNo: "101",
       db: null
     };
   },
   created() {
     this.db = firebase.firestore();
+    this.getLastOrderId();
   },
   methods: {
+    getLastOrderId() {
+      const self = this;
+      this.db
+        .collection("Orders")
+        .orderBy("created", "desc")
+        .limit(1)
+        .get()
+        .then(function(orders) {
+          if (orders.docs.length) {
+            self.orderNo = parseInt(orders.docs[0].id) + 1;
+          } else {
+            self.orderNo = self.defaultOrderNo;
+          }
+        })
+        .catch(function(error) {
+          console.log("Error getting documents: ", error);
+        });
+    },
     checkForm(event) {
       event.target.classList.add("was-validated");
       if (event.target.checkValidity()) {
@@ -246,7 +270,8 @@ export default {
                   color: self.color,
                   material: self.material,
                   quantity: self.quantity,
-                  size: self.size
+                  size: self.size,
+                  status: 1
                 }
               ]
             })
