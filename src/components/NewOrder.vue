@@ -3,7 +3,7 @@
     <div class="header">Customer Details</div>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="inputCustomerName">Name</label>
+        <!-- <label for="inputCustomerName">Name</label> -->
         <input
           type="text"
           class="form-control"
@@ -14,7 +14,7 @@
         />
       </div>
       <div class="form-group col-md-4">
-        <label for="inputMobile">Mobile</label>
+        <!-- <label for="inputMobile">Mobile</label> -->
         <input
           type="tel"
           class="form-control"
@@ -27,7 +27,7 @@
         />
       </div>
       <div class="form-group col-md-4">
-        <label for="inputEmail">Email</label>
+        <!-- <label for="inputEmail">Email</label> -->
         <input
           type="email"
           class="form-control"
@@ -40,7 +40,7 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-12">
-        <label for="inputAddress">Address</label>
+        <!-- <label for="inputAddress">Address</label> -->
         <input
           type="text"
           class="form-control"
@@ -54,7 +54,7 @@
     <div class="header">Order Details</div>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="inputOrderNo">Order No.</label>
+        <!-- <label for="inputOrderNo">Order No.</label> -->
         <input
           type="text"
           class="form-control"
@@ -65,7 +65,7 @@
         />
       </div>
       <div class="form-group col-md-4">
-        <label for="inputSalePerson">Sales person</label>
+        <!-- <label for="inputSalePerson">Sales person</label> -->
         <select
           class="custom-select mr-sm-2"
           id="inputSalePerson"
@@ -80,7 +80,7 @@
         </select>
       </div>
       <div class="form-group col-md-4">
-        <label for="totalCost">Total cost</label>
+        <!-- <label for="totalCost">Total cost</label> -->
         <input
           type="text"
           class="form-control"
@@ -93,7 +93,7 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <label for="advanceReceived">Advance received</label>
+        <!-- <label for="advanceReceived">Advance received</label> -->
         <input
           type="text"
           class="form-control"
@@ -104,7 +104,7 @@
         />
       </div>
       <div class="form-group col-md-4">
-        <label for="inputDeliveryDate">Delivery date</label>
+        <!-- <label for="inputDeliveryDate">Delivery date</label> -->
         <input
           type="date"
           class="form-control"
@@ -115,18 +115,41 @@
         />
       </div>
     </div>
-    <div class="header">Item Details</div>
-    <div class="item-details">
+    <div class="header">
+      <button
+        type="button"
+        class="btn btn-sm btn-success add-item-btn"
+        @click="addNewItem"
+      >
+        Add item
+        <span class="badge badge-light">{{ items.length }}</span>
+      </button>
+    </div>
+    <div class="item-details" v-for="(item, index) in items" :key="index">
+      <div class="sub-header">
+        <span class="badge badge-primary">Item {{ index + 1 }} </span>
+        <span
+          class="badge badge-danger delete-item-btn"
+          @click="deleteItem(index)"
+          >X</span
+        >
+        <!-- <button
+          class="btn btn-sm btn-danger delete-item-btn"
+          @click="deleteItem(index)"
+        >
+          X
+        </button> -->
+      </div>
       <div class="form-row">
         <div class="form-group col-md-4">
-          <label for="inlineFormCustomSelect">Item</label>
+          <!-- <label for="inlineFormCustomSelect">Item {{ index + 1 }}</label> -->
           <select
             class="custom-select mr-sm-2"
             id="inlineFormCustomSelect"
             required
-            v-model="item"
+            v-model="item.itemName"
           >
-            <option value="" selected>Item purchased...</option>
+            <option value="" selected>Select item</option>
             <option value="Wardrobe">Wardrobe</option>
             <option value="Bed">Bed</option>
             <option value="Shoerack">Shoerack</option>
@@ -136,23 +159,23 @@
           </select>
         </div>
         <div class="form-group col-md-4">
-          <label for="inputColor">Color</label>
+          <!-- <label for="inputColor">Color</label> -->
           <input
             type="text"
             class="form-control"
             id="inputColor"
-            v-model="color"
+            v-model="item.color"
             placeholder="Color"
             required
           />
         </div>
         <div class="form-group col-md-4">
-          <label for="inputMaterial">Material</label>
+          <!-- <label for="inputMaterial">Material</label> -->
           <input
             type="text"
             class="form-control"
             id="inputMaterial"
-            v-model="material"
+            v-model="item.material"
             placeholder="Material"
             required
           />
@@ -160,30 +183,37 @@
       </div>
       <div class="form-row">
         <div class="form-group col-md-4">
-          <label for="inputQuantity">Quantity</label>
+          <!-- <label for="inputQuantity">Quantity</label> -->
           <input
             type="text"
             class="form-control"
             id="inputQuantity"
-            v-model="quantity"
+            v-model="item.quantity"
             placeholder="Quantity"
             required
           />
         </div>
         <div class="form-group col-md-4">
-          <label for="inputSize">Size</label>
+          <!-- <label for="inputSize">Size</label> -->
           <input
             type="text"
             class="form-control"
             id="inputSize"
-            v-model="size"
+            v-model="item.size"
             placeholder="Size"
             required
           />
         </div>
       </div>
     </div>
-    <button type="submit" class="btn btn-primary">Place Order</button>
+    <button
+      type="submit"
+      class="btn"
+      :class="placeOrderClass"
+      :disabled="placeOrderEnabled"
+    >
+      Place Order
+    </button>
   </form>
 </template>
 
@@ -201,11 +231,7 @@ export default {
       totalCost: "",
       advanceReceived: "",
       deliveryDate: "",
-      item: "",
-      color: "",
-      material: "",
-      size: "",
-      quantity: 1,
+      items: [],
       orderNo: "",
       defaultOrderNo: "101",
       db: null
@@ -215,7 +241,28 @@ export default {
     this.db = firebase.firestore();
     this.getLastOrderId();
   },
+  computed: {
+    placeOrderEnabled() {
+      return this.items.length ? false : true;
+    },
+    placeOrderClass() {
+      return this.items.length ? "btn-primary" : "btn-secondary";
+    }
+  },
   methods: {
+    addNewItem() {
+      this.items.push({
+        itemName: "",
+        color: "",
+        material: "",
+        quantity: 1,
+        size: "",
+        status: 1
+      });
+    },
+    deleteItem(index) {
+      this.items.splice(index, 1);
+    },
     getLastOrderId() {
       const self = this;
       this.db
@@ -225,9 +272,9 @@ export default {
         .get()
         .then(function(orders) {
           if (orders.docs.length) {
-            self.orderNo = parseInt(orders.docs[0].id) + 1;
+            self.orderNo = (parseInt(orders.docs[0].id) + 1).toString();
           } else {
-            self.orderNo = this.defaultOrderNo;
+            self.orderNo = self.defaultOrderNo;
           }
         })
         .catch(function(error) {
@@ -257,23 +304,14 @@ export default {
             .doc(self.orderNo)
             .set({
               advance: self.advanceReceived,
-              cost: self.totalCost,
+              totalCost: self.totalCost,
               salesperson: self.salesperson,
               created: new Date(currentDate),
               customerId: self.db.doc(`/Customers/${customer.id}`),
               deliveryDate: new Date(
                 `${document.querySelector('[id="inputDeliveryDate"]').value} `
               ),
-              items: [
-                {
-                  item: self.item,
-                  color: self.color,
-                  material: self.material,
-                  quantity: self.quantity,
-                  size: self.size,
-                  status: 1
-                }
-              ]
+              items: self.items
             })
             .then(function() {
               self.$router.push({ name: "dashboard" });
@@ -299,6 +337,17 @@ form {
     margin-bottom: 15px;
     font-size: 20px;
     font-weight: bolder;
+  }
+
+  .sub-header {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #c6c6c6;
+  }
+
+  .delete-item-btn {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
   }
 }
 </style>
