@@ -16,12 +16,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#"
-            >Home <span class="sr-only">(current)</span></a
-          >
+          <router-link to="/" class="nav-link">Dashboard</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Status</a>
+          <router-link to="newOrder" class="nav-link">Create</router-link>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
