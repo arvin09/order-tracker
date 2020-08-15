@@ -87,25 +87,28 @@ export default {
   methods: {
     fetchOrders() {
       const self = this;
-      this.db.collection("Orders").onSnapshot(orders => {
-        self.orders = [];
-        orders.forEach(function(doc) {
-          let order = {};
-          order = doc.data();
-          order.id = doc.id;
-          doc
-            .data()
-            .customerId.get()
-            .then(customer => {
-              order.customer = customer.data();
-              self.orders.push(order);
-              self.showLoader = false;
-            })
-            .catch(error => {
-              console.log("Error getting documents: ", error);
-            });
+      this.db
+        .collection("Orders")
+        .orderBy("created", "desc")
+        .onSnapshot(orders => {
+          self.orders = [];
+          orders.forEach(function(doc) {
+            let order = {};
+            order = doc.data();
+            order.id = doc.id;
+            doc
+              .data()
+              .customerId.get()
+              .then(customer => {
+                order.customer = customer.data();
+                self.orders.push(order);
+                self.showLoader = false;
+              })
+              .catch(error => {
+                console.log("Error getting documents: ", error);
+              });
+          });
         });
-      });
     },
     getDateDiff(createdDate, deliveryDate) {
       const d1 = this.getDate(createdDate, false);
