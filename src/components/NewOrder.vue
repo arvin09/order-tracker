@@ -106,10 +106,12 @@
       <div class="form-group col-md-4">
         <!-- <label for="inputDeliveryDate">Delivery date</label> -->
         <input
-          type="date"
+          type="text"
           class="form-control"
           id="inputDeliveryDate"
           v-model="deliveryDate"
+          onfocus="(this.type='date')"
+          onblur="(this.value ? this.type='date' : this.type='text')"
           placeholder="Delivery date"
           required
         />
@@ -122,7 +124,7 @@
         @click="addNewItem"
       >
         Add item
-        <span class="badge badge-light">{{ items.length }}</span>
+        <span class="badge badge-light badge-pill">{{ items.length }}</span>
       </button>
     </div>
     <div class="item-details" v-for="(item, index) in items" :key="index">
