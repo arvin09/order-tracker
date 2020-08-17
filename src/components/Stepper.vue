@@ -20,11 +20,11 @@ export default {
       type: Array,
       default: () => [
         {
-          label: "Ordered Created",
+          label: "Ordered",
           active: false
         },
         {
-          label: "Processed",
+          label: "Process",
           active: false
         },
         {
@@ -32,11 +32,11 @@ export default {
           active: false
         },
         {
-          label: "Assembling",
+          label: "Assemble",
           active: false
         },
         {
-          label: "Delivered",
+          label: "Deliver",
           active: false
         }
       ]
@@ -82,10 +82,10 @@ export default {
 <style lang="scss" scoped>
 .stepper {
   width: 100%;
-  margin-top: 100px;
 }
 .step-bar {
   counter-reset: step;
+  padding: 0;
   li {
     list-style-type: none;
     float: left;

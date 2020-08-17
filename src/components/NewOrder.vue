@@ -123,24 +123,18 @@
         class="btn btn-sm btn-success add-item-btn"
         @click="addNewItem"
       >
-        Add item
+        Add Product
         <span class="badge badge-light badge-pill">{{ items.length }}</span>
       </button>
     </div>
     <div class="item-details" v-for="(item, index) in items" :key="index">
       <div class="sub-header">
-        <span class="badge badge-primary">Item {{ index + 1 }} </span>
+        <span class="badge badge-primary">Product {{ index + 1 }} </span>
         <span
           class="badge badge-danger delete-item-btn"
           @click="deleteItem(index)"
           >X</span
         >
-        <!-- <button
-          class="btn btn-sm btn-danger delete-item-btn"
-          @click="deleteItem(index)"
-        >
-          X
-        </button> -->
       </div>
       <div class="form-row">
         <div class="form-group col-md-4">
@@ -151,7 +145,7 @@
             required
             v-model="item.itemName"
           >
-            <option value="" selected>Select item</option>
+            <option value="" selected>Select product</option>
             <option value="Wardrobe">Wardrobe</option>
             <option value="Bed">Bed</option>
             <option value="Shoerack">Shoerack</option>

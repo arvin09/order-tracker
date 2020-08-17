@@ -13,56 +13,53 @@
           v-for="order in orders"
           :key="order.id"
         >
-          <div class="row">
-            <div class="col-sm">
-              <ul class="list-group">
-                <li class="order__detail--id">Order {{ order.id }}</li>
-                <li class="order__detail--customer-name">
-                  Customer {{ order.customer.name }}
-                </li>
-                <li class="order__detail--order-date">
-                  Placed on {{ getDate(order.created.seconds) }}
-                </li>
-                <li class="order__detail--order-date">
-                  Sales by {{ order.salesperson }}
-                </li>
-              </ul>
+          <router-link :to="{ name: 'orderDetail', params: { order } }">
+            <div class="row">
+              <div class="col-sm">
+                <ul class="list-group">
+                  <li class="order__detail--id">Order {{ order.id }}</li>
+                  <li class="order__detail--customer-name">
+                    Customer {{ order.customer.name }}
+                  </li>
+                  <li class="order__detail--order-date">
+                    Placed on {{ order.created }}
+                  </li>
+                  <li class="order__detail--order-date">
+                    Sales by {{ order.salesperson }}
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg">
+                <ul class="list-group">
+                  <li class="order__completed--label">Completed</li>
+                  <li class="order__completed--percent">45%</li>
+                  <li class="order__completed--progress">
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: 45%;"
+                        aria-valuenow="45"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      ></div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg d-none d-sm-block">
+                <ul class="list-group">
+                  <li class="order__expected--label">Expected Completion</li>
+                  <li class="order__expected--date">
+                    {{ order.deliveryDate }}
+                  </li>
+                  <li class="order__expected--days">
+                    {{ order.remainingDays }}
+                  </li>
+                </ul>
+              </div>
             </div>
-            <div class="col-lg">
-              <ul class="list-group">
-                <li class="order__completed--label">Completed</li>
-                <li class="order__completed--percent">45%</li>
-                <li class="order__completed--progress">
-                  <div class="progress">
-                    <div
-                      class="progress-bar"
-                      role="progressbar"
-                      style="width: 45%;"
-                      aria-valuenow="45"
-                      aria-valuemin="0"
-                      aria-valuemax="100"
-                    ></div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="col-lg d-none d-sm-block">
-              <ul class="list-group">
-                <li class="order__expected--label">Expected Completion</li>
-                <li class="order__expected--date">
-                  {{ getDate(order.deliveryDate.seconds) }}
-                </li>
-                <li class="order__expected--days">
-                  {{
-                    getDateDiff(
-                      order.created.seconds,
-                      order.deliveryDate.seconds
-                    )
-                  }}
-                </li>
-              </ul>
-            </div>
-          </div>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -77,7 +74,8 @@ export default {
     return {
       db: null,
       orders: [],
-      showLoader: true
+      showLoader: true,
+      order: "Test"
     };
   },
   created() {
@@ -101,6 +99,12 @@ export default {
               .customerId.get()
               .then(customer => {
                 order.customer = customer.data();
+                order.remainingDays = self.getDateDiff(
+                  order.created.seconds,
+                  order.deliveryDate.seconds
+                );
+                order.deliveryDate = self.getDate(order.deliveryDate.seconds);
+                order.created = self.getDate(order.created.seconds);
                 self.orders.push(order);
                 self.showLoader = false;
               })
@@ -167,6 +171,11 @@ export default {
     box-shadow: 10px 10px 5px 0px #a1a1a1bf;
     margin-bottom: 20px;
     // border-radius: 10px;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
     &__detail {
       &--id {
