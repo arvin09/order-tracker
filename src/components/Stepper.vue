@@ -43,13 +43,32 @@ export default {
     },
     status: {
       type: Number,
-      default: null
+      default: 0
     }
   },
+  data() {
+    return {
+      options: {
+        steps: this.steps,
+        status: this.status
+      }
+    };
+  },
   mounted() {
-    if (this.status) {
-      for (let i = 0; i < this.status; i++) {
-        this.steps[i].active = true;
+    this.setStepperStatus(this.status);
+  },
+  methods: {
+    setStepperStatus(status) {
+      if (!status) {
+        return;
+      }
+      this.options.status = status;
+      if (status <= this.steps.length) {
+        for (let i = 1; i <= status; i++) {
+          this.steps[i - 1].active = true;
+        }
+      } else {
+        console.info("Steps are completed");
       }
     }
   },
