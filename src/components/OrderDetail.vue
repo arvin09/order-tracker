@@ -1,5 +1,5 @@
 <template>
-  <div class="order-details">
+  <div class="order-details container-fluid">
     <div class="row">
       <div class="col-sm">
         <ul class="list-group">
@@ -82,7 +82,7 @@ export default {
 <style scoped lang="scss">
 .order-details {
   font-weight: bolder;
-  padding: 10px;
+  // padding: 10px;
 
   .header {
     margin-bottom: 15px;
