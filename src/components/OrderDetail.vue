@@ -47,28 +47,22 @@
     </div>
     <div class="item-details">
       <div>Product Details</div>
-      <div class="container">
-        <div
-          class="row item-detail"
-          v-for="(item, index) in order.items"
-          :key="index"
-        >
-          <div class="detail">
-            <div class="detail__name">
-              {{ index + 1 }}. {{ item.itemName }}
-            </div>
-            <div class="detail__attr">
-              {{ item.color }}, {{ item.material }}
-            </div>
-            <div class="detail__attr">
-              Size {{ item.size }}, {{ item.quantity }} Qty
-            </div>
+      <div
+        class="row item-detail"
+        v-for="(item, index) in order.items"
+        :key="index"
+      >
+        <div class="detail">
+          <div class="detail__name">{{ index + 1 }}. {{ item.itemName }}</div>
+          <div class="detail__attr">{{ item.color }}, {{ item.material }}</div>
+          <div class="detail__attr">
+            Size {{ item.size }}, {{ item.quantity }} Qty
           </div>
-          <progress-stepper
-            :ref="`stepper-${index}`"
-            :status="item.status"
-          ></progress-stepper>
         </div>
+        <progress-stepper
+          :ref="`stepper-${index}`"
+          :status="item.status"
+        ></progress-stepper>
       </div>
     </div>
   </div>
@@ -105,6 +99,7 @@ export default {
     }
 
     &-detail {
+      margin: 10px;
       margin-top: 20px;
       padding-bottom: 10px;
       border-bottom: 1px solid #c6c6c6;
