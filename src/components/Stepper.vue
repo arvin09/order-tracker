@@ -36,7 +36,7 @@ export default {
           active: false
         },
         {
-          label: "Deliver",
+          label: "Ready",
           active: false
         }
       ]

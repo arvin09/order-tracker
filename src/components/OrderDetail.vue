@@ -35,14 +35,16 @@
       <div class="col-sm">
         <ul class="list-group">
           <li class="order__completed--label">Completed</li>
-          <li class="order__completed--percent">45%</li>
+          <li class="order__completed--percent">
+            {{ order.completionPercent }}%
+          </li>
           <li class="order__completed--progress">
             <div class="progress">
               <div
                 class="progress-bar"
                 role="progressbar"
-                style="width: 45%;"
-                aria-valuenow="45"
+                :style="`width:${order.completionPercent}%`"
+                :aria-valuenow="order.completionPercent"
                 aria-valuemin="0"
                 aria-valuemax="100"
               ></div>

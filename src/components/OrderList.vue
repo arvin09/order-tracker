@@ -32,14 +32,16 @@
               <div class="col-lg">
                 <ul class="list-group">
                   <li class="order__completed--label">Completed</li>
-                  <li class="order__completed--percent">45%</li>
+                  <li class="order__completed--percent">
+                    {{ order.completionPercent }}%
+                  </li>
                   <li class="order__completed--progress">
                     <div class="progress">
                       <div
                         class="progress-bar"
                         role="progressbar"
-                        style="width: 45%;"
-                        aria-valuenow="45"
+                        :style="`width: ${order.completionPercent}%`"
+                        :aria-valuenow="order.completionPercent"
                         aria-valuemin="0"
                         aria-valuemax="100"
                       ></div>
@@ -82,6 +84,11 @@ export default {
     this.db = firebase.firestore();
     this.fetchOrders();
   },
+  computed: {
+    statusWidth() {
+      return `width: ${this.statusPercentage}%`;
+    }
+  },
   methods: {
     fetchOrders() {
       const self = this;
@@ -105,6 +112,7 @@ export default {
                 );
                 order.deliveryDate = self.getDate(order.deliveryDate.seconds);
                 order.created = self.getDate(order.created.seconds);
+                order.completionPercent = self.statusPercentage(order.items);
                 self.orders.push(order);
                 self.showLoader = false;
               })
@@ -113,6 +121,16 @@ export default {
               });
           });
         });
+    },
+    statusPercentage(items) {
+      let totalStatus = 0;
+      items.forEach(item => {
+        totalStatus += item.status - 1;
+      });
+      if (totalStatus) {
+        return (totalStatus * 25) / items.length;
+      }
+      return 5;
     },
     getDateDiff(createdDate, deliveryDate) {
       const d1 = this.getDate(createdDate, false);
