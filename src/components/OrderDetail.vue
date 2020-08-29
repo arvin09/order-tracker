@@ -100,6 +100,11 @@ export default {
 .order-details {
   font-weight: bolder;
 
+  .row {
+    border-bottom: 1px solid #c6c6c6;
+    padding-bottom: 15px;
+  }
+
   .sub-header {
     background-color: #f2684e;
     margin-left: -15px;
