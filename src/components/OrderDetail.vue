@@ -1,6 +1,6 @@
 <template>
   <div class="order-details container-fluid">
-    <div class="sub-header">
+    <div class="sub-header sticky-top">
       <router-link to="/">
         <svg
           width="2em"
@@ -108,6 +108,7 @@ export default {
   }
 
   .sub-header {
+    top: 56px;
     background-color: #f2684e;
     margin-left: -15px;
     margin-right: -15px;
