@@ -1,5 +1,22 @@
 <template>
   <div class="order-details container-fluid">
+    <div class="sub-header">
+      <router-link to="/">
+        <svg
+          width="2em"
+          height="2em"
+          viewBox="0 0 16 16"
+          class="bi bi-arrow-left-short"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
+          /></svg
+        ><span>Back to Order list</span>
+      </router-link>
+    </div>
     <div class="row">
       <div class="col-sm">
         <ul class="list-group">
@@ -82,7 +99,17 @@ export default {
 <style scoped lang="scss">
 .order-details {
   font-weight: bolder;
-  // padding: 10px;
+
+  .sub-header {
+    background-color: #f2684e;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: 10px;
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  }
 
   .header {
     margin-bottom: 15px;
