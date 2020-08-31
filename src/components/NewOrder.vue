@@ -2,8 +2,7 @@
   <form novalidate @submit.prevent="checkForm">
     <div class="header">Customer Details</div>
     <div class="form-row">
-      <div class="form-group col-md-4">
-        <!-- <label for="inputCustomerName">Name</label> -->
+      <div class="form-label-group col-md-4">
         <input
           type="text"
           class="form-control"
@@ -12,9 +11,9 @@
           placeholder="Customer name"
           required
         />
+        <label for="inputCustomerName">Name</label>
       </div>
-      <div class="form-group col-md-4">
-        <!-- <label for="inputMobile">Mobile</label> -->
+      <div class="form-label-group col-md-4">
         <input
           type="tel"
           class="form-control"
@@ -25,9 +24,9 @@
           maxlength="10"
           required
         />
+        <label for="inputMobile">Mobile</label>
       </div>
-      <div class="form-group col-md-4">
-        <!-- <label for="inputEmail">Email</label> -->
+      <div class="form-label-group col-md-4">
         <input
           type="email"
           class="form-control"
@@ -36,11 +35,11 @@
           placeholder="Email"
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
         />
+        <label for="inputEmail">Email</label>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-12">
-        <!-- <label for="inputAddress">Address</label> -->
+      <div class="form-label-group col-md-12">
         <input
           type="text"
           class="form-control"
@@ -49,6 +48,7 @@
           placeholder="Address"
           required
         />
+        <label for="inputAddress">Address</label>
       </div>
     </div>
     <div class="header">Order Details</div>
@@ -64,7 +64,7 @@
           disabled
         />
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-label-group col-md-4">
         <!-- <label for="inputSalePerson">Sales person</label> -->
         <select
           class="custom-select mr-sm-2"
@@ -72,15 +72,14 @@
           required
           v-model="salesperson"
         >
-          <option value="" selected>Sales person name</option>
+          <option value selected>Sales person name</option>
           <option value="Baliram Waghmare">Baliram Waghmare</option>
           <option value="Tukaram Kamble">Tukaram Kamble</option>
           <option value="Akshya Waghmare">Akshya Waghmare</option>
           <option value="Tejas Kamble">Tejas Kamble</option>
         </select>
       </div>
-      <div class="form-group col-md-4">
-        <!-- <label for="totalCost">Total cost</label> -->
+      <div class="form-label-group col-md-4">
         <input
           type="text"
           class="form-control"
@@ -89,11 +88,11 @@
           placeholder="Total cost"
           required
         />
+        <label for="totalCost">Total cost</label>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-4">
-        <!-- <label for="advanceReceived">Advance received</label> -->
+      <div class="form-label-group col-md-4">
         <input
           type="text"
           class="form-control"
@@ -102,9 +101,9 @@
           placeholder="Advance received"
           required
         />
+        <label for="advanceReceived">Advance received</label>
       </div>
-      <div class="form-group col-md-4">
-        <!-- <label for="inputDeliveryDate">Delivery date</label> -->
+      <div class="form-label-group col-md-4">
         <input
           type="text"
           class="form-control"
@@ -115,6 +114,7 @@
           placeholder="Delivery date"
           required
         />
+        <label for="inputDeliveryDate">Delivery date</label>
       </div>
     </div>
     <div class="header">
@@ -129,7 +129,7 @@
     </div>
     <div class="item-details" v-for="(item, index) in items" :key="index">
       <div class="sub-header">
-        <span class="badge badge-primary">Product {{ index + 1 }} </span>
+        <span class="badge badge-primary">Product {{ index + 1 }}</span>
         <span
           class="badge badge-danger delete-item-btn"
           @click="deleteItem(index)"
@@ -137,15 +137,14 @@
         >
       </div>
       <div class="form-row">
-        <div class="form-group col-md-4">
-          <!-- <label for="inlineFormCustomSelect">Item {{ index + 1 }}</label> -->
+        <div class="form-label-group col-md-4">
           <select
             class="custom-select mr-sm-2"
             id="inlineFormCustomSelect"
             required
             v-model="item.itemName"
           >
-            <option value="" selected>Select product</option>
+            <option value selected>Select product</option>
             <option value="Wardrobe">Wardrobe</option>
             <option value="Bed">Bed</option>
             <option value="Shoerack">Shoerack</option>
@@ -154,8 +153,7 @@
             <option value="Study Table">Study Table</option>
           </select>
         </div>
-        <div class="form-group col-md-4">
-          <!-- <label for="inputColor">Color</label> -->
+        <div class="form-label-group col-md-4">
           <input
             type="text"
             class="form-control"
@@ -164,9 +162,9 @@
             placeholder="Color"
             required
           />
+          <label for="inputColor">Color</label>
         </div>
-        <div class="form-group col-md-4">
-          <!-- <label for="inputMaterial">Material</label> -->
+        <div class="form-label-group col-md-4">
           <input
             type="text"
             class="form-control"
@@ -175,11 +173,11 @@
             placeholder="Material"
             required
           />
+          <label for="inputMaterial">Material</label>
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-4">
-          <!-- <label for="inputQuantity">Quantity</label> -->
+        <div class="form-label-group col-md-4">
           <input
             type="text"
             class="form-control"
@@ -188,9 +186,9 @@
             placeholder="Quantity"
             required
           />
+          <label for="inputQuantity">Quantity</label>
         </div>
-        <div class="form-group col-md-4">
-          <!-- <label for="inputSize">Size</label> -->
+        <div class="form-label-group col-md-4">
           <input
             type="text"
             class="form-control"
@@ -199,6 +197,7 @@
             placeholder="Size"
             required
           />
+          <label for="inputSize">Size</label>
         </div>
       </div>
     </div>
@@ -325,8 +324,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 form {
-  label {
-    font-weight: bolder;
+  #inputOrderNo {
+    height: 3.125rem;
   }
   padding: 10px;
   .header {
@@ -344,6 +343,76 @@ form {
     position: absolute;
     right: 10px;
     cursor: pointer;
+  }
+
+  .form-signin {
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    margin: auto;
+  }
+
+  .form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+
+    input,
+    select,
+    label {
+      height: 3.125rem;
+      padding: 0.75rem;
+    }
+
+    label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      margin-bottom: 0; /* Override default `<label>` margin */
+      line-height: 1.5;
+      color: #495057;
+      pointer-events: none;
+      cursor: text; /* Match the input under the label */
+      border: 1px solid transparent;
+      border-radius: 0.25rem;
+      transition: all 0.1s ease-in-out;
+    }
+
+    input::placeholder {
+      color: transparent;
+    }
+
+    input:not(:placeholder-shown) {
+      padding-top: 1.25rem;
+      padding-bottom: 0.25rem;
+    }
+
+    input:not(:placeholder-shown) ~ label {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+      font-size: 12px;
+      color: #777;
+    }
+  }
+
+  /* Fallback for Edge
+-------------------------------------------------- */
+  @supports (-ms-ime-align: auto) {
+    .form-label-group {
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-direction: column-reverse;
+      flex-direction: column-reverse;
+    }
+
+    .form-label-group label {
+      position: static;
+    }
+
+    .form-label-group input::-ms-input-placeholder {
+      color: #777;
+    }
   }
 }
 </style>
