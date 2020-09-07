@@ -1,6 +1,10 @@
 <template>
   <nav class="navbar navbar-expand-lg sticky-top navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Order Tracker</a>
+    <!-- <a class="navbar-brand" href="#"> -->
+    <router-link to="/" class="navbar-brand nav-link"
+      >Order Tracker</router-link
+    >
+    <!-- </a> -->
     <button
       class="navbar-toggler"
       type="button"
@@ -16,7 +20,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <router-link to="/" class="nav-link">Dashboard</router-link>
+          <router-link to="/dashboard" class="nav-link">Dashboard</router-link>
         </li>
         <li class="nav-item">
           <router-link to="newOrder" class="nav-link">Create</router-link>
@@ -41,3 +45,7 @@ export default {
   name: "Navbar"
 };
 </script>
+<style lang="scss" scoped>
+a {
+}
+</style>

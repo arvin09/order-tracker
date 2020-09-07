@@ -3,12 +3,18 @@ import VueRouter from "vue-router";
 import Dashboard from "../views/Dashboard.vue";
 import Order from "../views/NewOrderView.vue";
 import OrderDetail from "../views/OrderDetailView.vue";
+import Login from "@/components/Login.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
+    name: "login",
+    component: Login
+  },
+  {
+    path: "/dashboard",
     name: "dashboard",
     component: Dashboard
   },
