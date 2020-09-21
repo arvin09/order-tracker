@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 export default {
   data() {
     return {
@@ -50,7 +51,16 @@ export default {
     checkForm(event) {
       event.target.classList.add("was-validated");
       if (event.target.checkValidity()) {
-        // this.createOrder();
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(this.email, this.password)
+          .then(() => {
+            // console.log(data);
+            this.$router.replace({ name: "dashboard" });
+          })
+          .catch(err => {
+            this.message = err.message;
+          });
       }
     }
   }

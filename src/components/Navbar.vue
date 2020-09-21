@@ -26,26 +26,38 @@
           <router-link to="newOrder" class="nav-link">Create</router-link>
         </li>
       </ul>
-      <!-- <form class="form-inline my-2 my-lg-0">
-        <input
-          class="form-control mr-sm-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Search
-        </button>
-      </form> -->
+      <div class="navbar-nav nav-item my-2 my-lg-0">
+        <span class="nav-item">
+          <a href="#" class="nav-link" @click="signout"> Sign out</a>
+        </span>
+      </div>
     </div>
   </nav>
 </template>
 <script>
+import { mapGetters } from "vuex";
+import firebase from "firebase";
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  computed: {
+    ...mapGetters({
+      user: "user"
+    }),
+    isSignedIn() {
+      return this.user && this.user.isLoggedIn ? true : false;
+    }
+  },
+  methods: {
+    signout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace({ name: "/" });
+          // TODO: debug for this work around
+          window.location.reload();
+        });
+    }
+  }
 };
 </script>
-<style lang="scss" scoped>
-a {
-}
-</style>

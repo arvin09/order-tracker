@@ -16,18 +16,27 @@ const routes = [
   {
     path: "/dashboard",
     name: "dashboard",
-    component: Dashboard
+    component: Dashboard,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/newOrder",
     name: "newOrder",
-    component: Order
+    component: Order,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: "/orderDetail",
     name: "orderDetail",
     component: OrderDetail,
-    props: true
+    props: true,
+    meta: {
+      requiresAuth: true
+    }
   }
 ];
 
@@ -38,8 +47,18 @@ const router = new VueRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
+  const store = await import("../store");
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    setTimeout(() => {
+      if (store.default.getters.user.isLoggedIn) {
+        next();
+        return;
+      }
+    }, 0);
+  }
+
   if (to.path === "/orderDetail" && to.params !== null) {
-    next("/");
+    next("/dashboard");
   }
   next();
 });

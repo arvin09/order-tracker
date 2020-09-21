@@ -1,7 +1,7 @@
 <template>
   <div class="order-details container-fluid">
     <div class="sub-header sticky-top">
-      <router-link to="/">
+      <router-link to="/dashboard">
         <svg
           width="2em"
           height="2em"
